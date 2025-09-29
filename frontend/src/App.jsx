@@ -10,6 +10,9 @@ import ChatPage from './pages/ChatPage';
 import VoicePage from './pages/VoicePage';
 import Layout from './components/Layout/Layout';
 
+import ChatDetailsPage from './pages/ChatDetailsPage';
+import VoiceDetailsPage from './pages/VoiceDetailsPage';
+
 function App() {
   return (
     <Router>
@@ -21,7 +24,9 @@ function App() {
           <Route path="/emails" element={<EmailPage />} />
           <Route path="/emails/:id" element={<EmailDetailsPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chat/:id" element={<ChatDetailsPage />} />
           <Route path="/voice" element={<VoicePage />} />
+          <Route path="/voice/:id" element={<VoiceDetailsPage />} />
         </Route>
       </Routes>
     </Router>

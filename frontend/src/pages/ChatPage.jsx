@@ -1,10 +1,17 @@
 import React from 'react';
+import { initialChatData } from '../data/initialData';
+import ChatTile from '../components/ChatTile';
+import '../styles/Tile.css';
 
 const ChatPage = () => {
   return (
     <div>
-      <h2>Chat Page</h2>
-      <p>This is a placeholder for the Chat page.</p>
+      <h2>Chat Tickets</h2>
+      <div className="grid-container">
+        {initialChatData.map(chat => (
+          <ChatTile key={chat.id} chat={chat} />
+        ))}
+      </div>
     </div>
   );
 };

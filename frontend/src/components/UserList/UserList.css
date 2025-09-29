@@ -1,0 +1,67 @@
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list-item {
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.user-list-item:last-child {
+  border-bottom: none;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.user-email {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.user-role {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+
+.accordion-content {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f7fafc;
+  border-radius: 8px;
+}
+
+.accordion-content h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.accordion-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion-content li {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-bottom: 4px;
+}

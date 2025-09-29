@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import { ThemeContext } from '../../context/ThemeContext';
 import './Layout.css';
 
 const Layout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const { themeMode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', themeMode);
+  }, [themeMode]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);

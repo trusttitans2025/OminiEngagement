@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .dashboard-container {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+  }
+  
+  /* Neural Network Background */
+  .neural-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.05;
+  }
+  
+  /* Main Container */
+  .main-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .main-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .main-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+  }
+
+  /* Neural Canvas */
+  .neural-canvas {
+    grid-column: 1 / -1;
+  }
+
+  .neural-network {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+
+  .neural-node-container {
+    display: flex;
+    gap: 48px;
+  }
+
+  .neural-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .neural-node:hover {
+    transform: scale(1.1);
+  }
+
+  .neural-node-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+  }
+
+  .neural-node-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4a5568;
+  }
+
+  /* Channel Chart */
+  .channel-chart-container {
+    grid-column: span 2;
+  }

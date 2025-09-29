@@ -1,0 +1,33 @@
+.tile-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tile {
+  background-color: var(--card-background);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+}
+
+.tile:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tile h3 {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.tile p {
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.4;
+}
