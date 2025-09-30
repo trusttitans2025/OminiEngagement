@@ -1,7 +1,7 @@
 import React from 'react';
 import { initialVoiceData } from '../data/initialData';
 import VoiceTile from '../components/VoiceTile';
-import '../styles/Tile.css';
+// import '../styles/Tile.css';
 
 const VoicePage = () => {
   return (

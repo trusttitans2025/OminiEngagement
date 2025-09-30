@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { initialChatData } from '../data/initialData';
-import ChatTile from '../components/ChatTile';
-import '../styles/Tile.css';
+import ChatList from '../components/ChatList';
+import ChatWindow from '../components/ChatWindow';
+import './ChatPage.css'; // Assuming you'll create this CSS file
 
 const ChatPage = () => {
+  const [chats, setChats] = useState(initialChatData);
+  const [selectedChat, setSelectedChat] = useState(null);
+
+  const handleSelectChat = (chat) => {
+    setSelectedChat(chat);
+  };
+
+  const handleSendMessage = (chatId, message) => {
+    setChats(prevChats => {
+      const updatedChats = prevChats.map(chat =>
+        chat.id === chatId
+          ? { ...chat, messages: [...chat.messages, { sender: 'You', text: message, timestamp: new Date().toISOString() }], lastMessage: message }
+          : chat
+      );
+      // Update selectedChat to reflect the changes
+      setSelectedChat(updatedChats.find(chat => chat.id === chatId));
+      return updatedChats;
+    });
+  };
+
   return (
-    <div>
-      <h2>Chat Tickets</h2>
-      <div className="grid-container">
-        {initialChatData.map(chat => (
-          <ChatTile key={chat.id} chat={chat} />
-        ))}
-      </div>
+    <div className="chat-page-container">
+      <ChatList chats={chats} onSelectChat={handleSelectChat} selectedChat={selectedChat} />
+      <ChatWindow chat={selectedChat} onSendMessage={handleSendMessage} />
     </div>
   );
 };
