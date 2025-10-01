@@ -41,6 +41,7 @@ const Dashboard = () => {
   const canvasRef = useRef(null);
 
   const handleNodeClick = (path) => {
+    console.log('Navigating to:', path);
     navigate(path);
   };
 

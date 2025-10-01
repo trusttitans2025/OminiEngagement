@@ -254,7 +254,8 @@
   position: absolute;
   width: 45px;
   height: 45px;
-  background: linear-gradient(135deg, #00d4ff, #9333ea);
+  /* background: linear-gradient(135deg, #00d4ff, #9333ea); */
+  background: linear-gradient(90deg, #18a463, #00d4ff) !important;
   border-radius: 50%;
   display: flex;
   align-items: center;

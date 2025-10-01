@@ -38,7 +38,8 @@
     font-weight: 500;
     padding: 6px 16px;
     border-radius: 20px;
-    background: var(--primary-gradient);
+    /* background: var(--primary-gradient); */
+    background: linear-gradient(90deg, #18a463, #00d4ff) !important;
     color: #fff;
 }
 
