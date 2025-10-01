@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { initialEmails, initialChatData, initialVoiceData } from '../../data/initialData';
 import './UserList.css';
+import { TextField } from '@mui/material';
 
 const users = [
   { 
@@ -38,6 +39,7 @@ const users = [
 
 const UserList = () => {
   const [openAccordion, setOpenAccordion] = useState(null);
+  const [filter, setFilter] = useState('');
 
   const handleAccordionClick = (userId) => {
     setOpenAccordion(openAccordion === userId ? null : userId);
@@ -47,7 +49,7 @@ const UserList = () => {
     const tickets = [];
     initialEmails.forEach(e => {
       if (e.email === email) {
-        tickets.push({ type: 'Email', ticketNumber: e.ticketNumber, id: e.id });
+        tickets.push({ type: 'Email', ticketNumber: e.ticketId, id: e.id });
       }
     });
     initialChatData.forEach(c => {
@@ -63,32 +65,48 @@ const UserList = () => {
     return tickets;
   };
 
+  const filteredUsers = users.filter(user => 
+    user.name.toLowerCase().includes(filter.toLowerCase()) || 
+    user.email.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
-    <ul className="user-list">
-      {users.map(user => (
-        <li key={user.id} className="user-list-item">
-          <div className="user-info" onClick={() => handleAccordionClick(user.id)}>
-            <div className="user-name">{user.name}</div>
-            <div className="user-email">{user.email}</div>
-          </div>
-          <div className="user-role">{user.role}</div>
-          {openAccordion === user.id && (
-            <div className="accordion-content">
-              <h4>Tickets:</h4>
-              <ul>
-                {getUserTickets(user.email).map(ticket => (
-                  <li key={ticket.ticketNumber}>
-                    <Link to={`/${ticket.type.toLowerCase()}/${ticket.id}`}>
-                      {ticket.type}: {ticket.ticketNumber}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+    <div>
+      <TextField
+        label="Filter by name or email"
+        variant="outlined"
+        size="small"
+        fullWidth
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        style={{ marginBottom: '20px' }}
+      />
+      <ul className="user-list">
+        {filteredUsers.map(user => (
+          <li key={user.id} className="user-list-item">
+            <div className="user-info" onClick={() => handleAccordionClick(user.id)}>
+              <div className="user-name">{user.name}</div>
+              <div className="user-email">{user.email}</div>
             </div>
-          )}
-        </li>
-      ))}
-    </ul>
+            <div className="user-role">{user.role}</div>
+            {openAccordion === user.id && (
+              <div className="accordion-content">
+                <h4>Tickets:</h4>
+                <ul>
+                  {getUserTickets(user.email).map(ticket => (
+                    <li key={ticket.ticketNumber}>
+                      <Link to={`/${ticket.type.toLowerCase()}/${ticket.id}`}>
+                        {ticket.type}: {ticket.ticketNumber}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

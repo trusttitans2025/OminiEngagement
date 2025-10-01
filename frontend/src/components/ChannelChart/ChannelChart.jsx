@@ -1,16 +1,17 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const data = [
-  { name: 'Email', value: 400, fill: '#8884d8' },
-  { name: 'Chat', value: 300, fill: '#82ca9d' },
-  { name: 'Web', value: 200, fill: '#ffc658' },
-  { name: 'Voice', value: 100, fill: '#ff8042' },
+  { name: 'Email', value: 400, fill: '#8884d8', sentiment: 0.8 },
+  { name: 'Chat', value: 300, fill: '#82ca9d', sentiment: 0.6 },
+  { name: 'Voice', value: 100, fill: '#ff8042', sentiment: 0.9 },
 ];
 
 const ChannelChart = () => {
   return (
     <div style={{ width: '100%', height: 300 }}>
+      {/* <h2 className="canvas-title"><BarChartIcon /> Channel Data</h2> */}
       <div style={{ display: 'flex' }}>
         <ResponsiveContainer width="50%" height={300}>
           <PieChart>
@@ -34,6 +35,7 @@ const ChannelChart = () => {
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
             </Bar>
+            <Line type="monotone" dataKey="sentiment" stroke="#ff7300" />
           </BarChart>
         </ResponsiveContainer>
       </div>

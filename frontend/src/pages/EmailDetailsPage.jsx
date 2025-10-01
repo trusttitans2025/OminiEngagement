@@ -18,7 +18,7 @@ const EmailDetailsPage = () => {
     setReplyText(email.reply);
   };
 
-  const summary = `This is a summary of the conversation between you and ${email.sender}. The original email was about \"${email.subject}\" and the AI suggested a reply.`;
+  const summary = `This is a summary of the conversation between you and ${email.sender}. The original email was about "${email.subject}" and the AI suggested a reply.`;
 
   return (
     <div className="email-details-page">
