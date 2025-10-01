@@ -1,67 +1,79 @@
-.user-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+:root {
+    --primary-gradient: linear-gradient(135deg, #00d4ff, #ff00ff);
+    --glass-bg: rgba(10, 14, 39, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
 }
 
-.user-list-item {
-  padding: 16px 0;
-  border-bottom: 1px solid #e2e8f0;
+.user-accordion {
+    background: transparent !important;
+    color: #e0e0e0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.3s ease;
 }
 
-.user-list-item:last-child {
-  border-bottom: none;
+.user-accordion:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
-.user-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+.user-accordion .MuiAccordionSummary-root {
+    padding: 15px 20px !important;
+    min-height: 64px !important;
+}
+
+.user-accordion .MuiAccordionSummary-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .user-name {
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.user-email {
-  font-size: 0.875rem;
-  color: #718096;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .user-role {
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  background-color: #edf2f7;
-  color: #4a5568;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: var(--primary-gradient);
+    color: #fff;
 }
 
-.accordion-content {
-  margin-top: 16px;
-  padding: 16px;
-  background-color: #f7fafc;
-  border-radius: 8px;
+.user-accordion .MuiAccordionDetails-root {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-top: 1px solid var(--border-color);
 }
 
-.accordion-content h4 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #2d3748;
+.user-accordion .MuiAccordionDetails-root h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00d4ff;
 }
 
-.accordion-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.user-accordion .MuiAccordionDetails-root ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.accordion-content li {
-  font-size: 0.875rem;
-  color: #4a5568;
-  margin-bottom: 4px;
+.user-accordion .MuiAccordionDetails-root li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.user-accordion .MuiAccordionDetails-root a {
+    color: #00d4ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.user-accordion .MuiAccordionDetails-root a:hover {
+    color: #ff00ff;
 }

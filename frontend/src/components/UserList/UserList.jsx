@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { initialEmails, initialChatData, initialVoiceData } from '../../data/initialData';
 import './UserList.css';
-import { TextField } from '@mui/material';
+import { TextField, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const users = [
   { 
@@ -26,12 +27,7 @@ const users = [
 ];
 
 const UserList = () => {
-  const [openAccordion, setOpenAccordion] = useState(null);
   const [filter, setFilter] = useState('');
-
-  const handleAccordionClick = (userId) => {
-    setOpenAccordion(openAccordion === userId ? null : userId);
-  };
 
   const getUserTickets = (email) => {
     const tickets = [];
@@ -60,26 +56,49 @@ const UserList = () => {
 
   return (
     <div>
-      <TextField
-        label="Filter by name or email"
-        variant="outlined"
-        size="small"
-        fullWidth
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        style={{ marginBottom: '20px' }}
-      />
-      <ul className="user-list">
+     <TextField
+  label="Filter by name or email"
+  variant="outlined"
+  size="small"
+  fullWidth
+  value={filter}
+  onChange={(e) => setFilter(e.target.value)}
+  sx={{
+    marginBottom: '20px',
+    '& .MuiOutlinedInput-root': {
+      color: 'white',
+      '& fieldset': {
+        borderColor: 'rgba(255, 255, 255, 0.3)',
+      },
+      '&:hover fieldset': {
+        borderColor: 'rgba(255, 255, 255, 0.5)',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    },
+    '& .MuiInputLabel-root': {
+      color: 'rgba(255, 255, 255, 0.7)',
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: 'white',
+    },
+  }}
+/>
+      <div>
         {filteredUsers.map(user => (
-          <li key={user.id} className="user-list-item">
-            <div className="user-info" onClick={() => handleAccordionClick(user.id)}>
-              <div className="user-name">{user.name}</div>
-              <div className="user-email">{user.email}</div>
-            </div>
-            <div className="user-role">{user.role}</div>
-            {openAccordion === user.id && (
-              <div className="accordion-content">
-                <h4>Tickets:</h4>
+          <Accordion key={user.id} className="user-accordion">
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`panel${user.id}-content`}
+              id={`panel${user.id}-header`}
+            >
+              <Typography className="user-name">{user.name}</Typography>
+              <Typography className="user-role">{user.role}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div>
+                <Typography variant="h6">Tickets:</Typography>
                 <ul>
                   {getUserTickets(user.email).map(ticket => (
                     <li key={ticket.ticketNumber}>
@@ -90,12 +109,13 @@ const UserList = () => {
                   ))}
                 </ul>
               </div>
-            )}
-          </li>
+            </AccordionDetails>
+          </Accordion>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 export default UserList;
+
