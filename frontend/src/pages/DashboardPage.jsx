@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css';
 import UserList from '../components/UserList/UserList';
@@ -10,7 +10,7 @@ const Dashboard = () => {
   const neuralNetworkRef = useRef(null);
   const pieChartRef = useRef(null);
   const navigate = useNavigate();
-  const [activeChannel, setActiveChannel] = useState('all');
+  // const [activeChannel, setActiveChannel] = useState('all');
 
   // Neural Network Creation
   useEffect(() => {
@@ -268,36 +268,15 @@ const Dashboard = () => {
     };
   }, []);
 
-  const handleChannelSelect = (channel) => {
-    setActiveChannel(channel);
-    console.log('Selected channel:', channel);
-  };
+  // const handleChannelSelect = (channel) => {
+  //   setActiveChannel(channel);
+  //   console.log('Selected channel:', channel);
+  // };
 
-  // const channels = ['All', 'Chat', 'Email', 'Social', 'Voice', 'SMS', 'Web'];
-
+  
   return (
     <div className="dashboard-container">
       <canvas className="neural-background" ref={canvasRef} />
-
-      <div className="dashboard-header">
-        <h1 className="dashboard-title">OmniMind Dashboard</h1>
-        <p className="dashboard-subtitle">Real-time Analytics & Neural Network Monitor</p>
-      </div>
-
-      {/* Channel Selector */}
-      {/* <div className="channel-selector-container">
-        <div className="channel-selector">
-          {channels.map((channel) => (
-            <button
-              key={channel}
-              className={`channel-chip ${activeChannel === channel.toLowerCase() ? 'active' : ''}`}
-              onClick={() => handleChannelSelect(channel.toLowerCase())}
-            >
-              {channel}
-            </button>
-          ))}
-        </div>
-      </div> */}
 
       {/* Grid Layout */}
       <div className="dashboard-grid">

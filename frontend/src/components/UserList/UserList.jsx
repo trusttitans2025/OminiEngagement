@@ -23,18 +23,6 @@ const users = [
     email: 'peter.jones@example.com', 
     role: 'User', 
   },
-  { 
-    id: 4, 
-    name: 'Mary Williams', 
-    email: 'mary.williams@example.com', 
-    role: 'User', 
-  },
-  { 
-    id: 5, 
-    name: 'David Brown', 
-    email: 'david.brown@example.com', 
-    role: 'Editor', 
-  },
 ];
 
 const UserList = () => {
