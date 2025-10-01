@@ -7,7 +7,94 @@ import { Group, BarChart, Hub } from '@mui/icons-material';
 
 const Dashboard = () => {
   const canvasRef = useRef(null);
+  const neuralNetworkRef = useRef(null);
   const navigate = useNavigate();
+  const [activeChannel, setActiveChannel] = useState('all');
+
+  // Neural Network Creation
+  useEffect(() => {
+    const container = neuralNetworkRef.current;
+    if (!container) return;
+
+    // Clear previous content
+    container.innerHTML = '';
+
+    const nodes = [
+      { x: 20, y: 20, label: 'Chat', channel: 'chat', path: '/chat' },
+      { x: 120, y: 60, label: 'Email', channel: 'email', path: '/emails' },
+      { x: 220, y: 40, label: 'Social', channel: 'social', path: '/social' },
+      { x: 80, y: 120, label: 'Voice', channel: 'voice', path: '/voice' },
+      { x: 180, y: 150, label: 'SMS', channel: 'sms', path: '/sms' },
+      { x: 50, y: 200, label: 'Web', channel: 'web', path: '/web' },
+      { x: 150, y: 220, label: 'AI Core', channel: 'ai', path: '/ai-core' },
+      { x: 250, y: 180, label: 'CRM', channel: 'crm', path: '/crm' }
+    ];
+
+    const connections = [
+      { from: 0, to: 6 }, { from: 1, to: 6 }, { from: 2, to: 6 },
+      { from: 3, to: 6 }, { from: 4, to: 6 }, { from: 5, to: 6 },
+      { from: 6, to: 7 }, { from: 0, to: 1 }, { from: 2, to: 4 }
+    ];
+
+    // Create connections first (so they appear behind nodes)
+    connections.forEach(conn => {
+      const line = document.createElement('div');
+      line.className = 'neural-connection';
+      
+      const fromNode = nodes[conn.from];
+      const toNode = nodes[conn.to];
+      
+      const length = Math.sqrt(
+        Math.pow(toNode.x - fromNode.x, 2) + 
+        Math.pow(toNode.y - fromNode.y, 2)
+      );
+      
+      const angle = Math.atan2(toNode.y - fromNode.y, toNode.x - fromNode.x) * 180 / Math.PI;
+      
+      line.style.width = length + 'px';
+      line.style.left = fromNode.x + 20 + 'px';
+      line.style.top = fromNode.y + 20 + 'px';
+      line.style.transform = `rotate(${angle}deg)`;
+      line.style.animationDelay = Math.random() + 's';
+      
+      container.appendChild(line);
+    });
+
+    // Create nodes
+    nodes.forEach((node, index) => {
+      const nodeEl = document.createElement('div');
+      nodeEl.className = 'neural-node';
+      nodeEl.style.left = node.x + 'px';
+      nodeEl.style.top = node.y + 'px';
+      nodeEl.style.animationDelay = (index * 0.2) + 's';
+      nodeEl.textContent = node.label;
+      nodeEl.title = `${node.label} Channel - Click for details`;
+      
+      nodeEl.addEventListener('click', () => {
+        const analytics = {
+          activeConversations: Math.floor(Math.random() * 100) + 50,
+          responseTime: (Math.random() * 2 + 0.5).toFixed(1),
+          satisfactionScore: (Math.random() * 2 + 8).toFixed(1),
+          learningRate: (Math.random() * 20 + 80).toFixed(1)
+        };
+        
+        alert(
+          `${node.label} Channel Analytics:\n\n` +
+          `• Active Conversations: ${analytics.activeConversations}\n` +
+          `• Response Time: ${analytics.responseTime}s\n` +
+          `• Satisfaction Score: ${analytics.satisfactionScore}/10\n` +
+          `• Learning Rate: ${analytics.learningRate}%`
+        );
+        
+        // Navigate to channel page if path exists
+        if (node.path) {
+          navigate(node.path);
+        }
+      });
+      
+      container.appendChild(nodeEl);
+    });
+  }, [navigate]);
 
   // Background Canvas Animation
   useEffect(() => {
@@ -52,7 +139,7 @@ const Dashboard = () => {
         
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 123, 255, 0.1)';
+        ctx.fillStyle = 'rgba(0, 212, 255, 0.1)';
         ctx.fill();
       });
       
@@ -68,7 +155,7 @@ const Dashboard = () => {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(0, 123, 255, ${0.1 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(0, 212, 255, ${0.1 * (1 - distance / 150)})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -86,9 +173,29 @@ const Dashboard = () => {
     };
   }, []);
 
-  const handleNodeClick = (path) => {
-    navigate(path);
+  // Simulate real-time metric updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const metrics = document.querySelectorAll('.metric-value');
+      metrics.forEach(metric => {
+        // Add subtle animations to show live updates
+        metric.style.animation = 'none';
+        setTimeout(() => {
+          metric.style.animation = 'pulse 0.5s ease-in-out';
+        }, 10);
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleChannelSelect = (channel) => {
+    setActiveChannel(channel);
+    console.log('Selected channel:', channel);
+    // Filter neural network based on selected channel
   };
+
+  const channels = ['All', 'Chat', 'Email', 'Social', 'Voice', 'SMS', 'Web'];
 
   return (
     <div className="dashboard-container">
@@ -100,24 +207,26 @@ const Dashboard = () => {
             <Hub />
             <h2 className="card-title">Neural Engagement Network</h2>
           </div>
-          <div className="neural-network">
-            <div className="neural-node-container">
-              <div className="neural-node" onClick={() => handleNodeClick('/chat')}>
-                <div className="neural-node-icon">💬</div>
-                <div className="neural-node-label">Chat</div>
-              </div>
-              <div className="neural-node" onClick={() => handleNodeClick('/voice')}>
-                <div className="neural-node-icon">🎙️</div>
-                <div className="neural-node-label">Voice</div>
-              </div>
-              <div className="neural-node" onClick={() => handleNodeClick('/emails')}>
-                <div className="neural-node-icon">📧</div>
-                <div className="neural-node-label">Email</div>
-              </div>
-            </div>
+          
+          {/* Channel Selector */}
+          <div className="channel-selector">
+            {channels.map((channel) => (
+              <button
+                key={channel}
+                className={`channel-chip ${activeChannel === channel.toLowerCase() ? 'active' : ''}`}
+                onClick={() => handleChannelSelect(channel.toLowerCase())}
+              >
+                {channel}
+              </button>
+            ))}
+          </div>
+
+          {/* Neural Network Container */}
+          <div className="neural-network" id="neuralNetwork" ref={neuralNetworkRef}>
+            {/* Nodes and connections will be dynamically added here */}
           </div>
         </section>
-
+        
         <section className="card">
           <div className="card-header">
             <Group />
