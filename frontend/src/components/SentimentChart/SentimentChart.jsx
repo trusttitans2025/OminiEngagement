@@ -7,7 +7,7 @@ const data = [
   { name: 'Neutral', value: 300 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#00d4ff', '#ff00ff', '#ff9900'];
 
 const SentimentChart = () => {
   return (
@@ -18,7 +18,7 @@ const SentimentChart = () => {
           cx="50%"
           cy="50%"
           labelLine={false}
-          outerRadius={80}
+          outerRadius={100}
           fill="#8884d8"
           dataKey="value"
         >
@@ -26,8 +26,8 @@ const SentimentChart = () => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
-        <Legend />
+        <Tooltip contentStyle={{ backgroundColor: 'rgba(10, 14, 39, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)' }}/>
+        <Legend wrapperStyle={{ color: '#e0e0e0' }}/>
       </PieChart>
     </ResponsiveContainer>
   );

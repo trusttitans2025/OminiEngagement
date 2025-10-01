@@ -326,7 +326,7 @@ const Dashboard = () => {
         {/* Bar Chart Section */}
         <section className="grid-card chart-card">
           <div className="card-header">
-            {/* <BarChart className="card-icon" /> */}
+            <BarChart className="card-icon" />
             <h2 className="card-title">Channel Performance</h2>
           </div>
           <div className="card-content">
