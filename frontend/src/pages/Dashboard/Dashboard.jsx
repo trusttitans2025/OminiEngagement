@@ -55,15 +55,11 @@ const Dashboard = () => {
     }
 
     const nodes = [
-      { id: 'chat', label: 'Chat', x: 100, y: 200 },
-      { id: 'voice', label: 'Voice', x: 300, y: 100 },
       { id: 'email', label: 'Email', x: 300, y: 300 },
       { id: 'center', label: 'Omini', x: 200, y: 200 },
     ];
 
     const connections = [
-      { from: 'chat', to: 'center' },
-      { from: 'voice', to: 'center' },
       { from: 'email', to: 'center' },
     ];
 
@@ -161,9 +157,7 @@ const Dashboard = () => {
                   <h2 className="card-title">🌐 Neural Engagement Network</h2>
                   <div className="channel-selector">
                       <div className="channel-chip active">All Channels</div>
-                      <div className="channel-chip">Chat</div>
                       <div className="channel-chip">Email</div>
-                      <div className="channel-chip">Social</div>
                       <div className="channel-chip">Voice</div>
                   </div>
                 </div>

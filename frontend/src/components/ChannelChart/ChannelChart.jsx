@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 const data = [
   { name: 'Email', value: 400, fill: 'url(#colorEmail)' },
   { name: 'Chat', value: 300, fill: 'url(#colorChat)' },
-  { name: 'Voice', value: 100, fill: 'url(#colorVoice)' },
+  { name: 'CRM', value: 100, fill: 'url(#colorVoice)' },
 ];
 
 const ChannelChart = () => {

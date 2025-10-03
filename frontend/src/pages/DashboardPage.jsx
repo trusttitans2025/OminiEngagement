@@ -1,4 +1,4 @@
-import React, {useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css';
 import UserList from '../components/UserList/UserList';
@@ -10,30 +10,29 @@ const Dashboard = () => {
   const neuralNetworkRef = useRef(null);
   const pieChartRef = useRef(null);
   const navigate = useNavigate();
-  // const [activeChannel, setActiveChannel] = useState('all');
 
-  // Neural Network Creation
+  // Neural Network Creation - Hierarchical Structure
   useEffect(() => {
     const container = neuralNetworkRef.current;
     if (!container) return;
 
     container.innerHTML = '';
 
+    // Hierarchical layout with AI Core at the center
     const nodes = [
-      { x: 40, y: 30, label: 'Chat', channel: 'chat', path: '/chat' },
-      { x: 140, y: 50, label: 'Email', channel: 'email', path: '/emails' },
-      { x: 240, y: 30, label: 'Social', channel: 'social', path: '/social' },
-      { x: 90, y: 100, label: 'Voice', channel: 'voice', path: '/voice' },
-      { x: 190, y: 120, label: 'SMS', channel: 'sms', path: '/sms' },
-      { x: 40, y: 170, label: 'Web', channel: 'web', path: '/web' },
-      { x: 140, y: 190, label: 'AI Core', channel: 'ai', path: '/ai-core' },
-      { x: 240, y: 170, label: 'CRM', channel: 'crm', path: '/crm' }
+      { x: 130, y: 30, label: 'AI Core', channel: 'ai', path: '/ai-core', isCore: true },
+      { x: 30, y: 120, label: 'Chat', channel: 'chat', path: '/chat' },
+      { x: 130, y: 140, label: 'Email', channel: 'email', path: '/emails' },
+      { x: 230, y: 120, label: 'CRM', channel: 'crm', path: '/crm' }
     ];
 
+    // All channels connect to AI Core (hierarchical)
     const connections = [
-      { from: 0, to: 6 }, { from: 1, to: 6 }, { from: 2, to: 6 },
-      { from: 3, to: 6 }, { from: 4, to: 6 }, { from: 5, to: 6 },
-      { from: 6, to: 7 }, { from: 0, to: 1 }, { from: 2, to: 4 }
+      { from: 0, to: 1 }, // AI Core to Chat
+      { from: 0, to: 2 }, // AI Core to Email
+      { from: 0, to: 3 }, // AI Core to CRM
+      { from: 1, to: 2 }, // Chat to Email (cross connection)
+      { from: 2, to: 3 }  // Email to CRM (cross connection)
     ];
 
     connections.forEach(conn => {
@@ -61,32 +60,29 @@ const Dashboard = () => {
 
     nodes.forEach((node, index) => {
       const nodeEl = document.createElement('div');
-      nodeEl.className = 'neural-node';
+      nodeEl.className = node.isCore ? 'neural-node core-node' : 'neural-node';
       nodeEl.style.left = node.x + 'px';
       nodeEl.style.top = node.y + 'px';
       nodeEl.style.animationDelay = (index * 0.2) + 's';
       nodeEl.textContent = node.label;
-      nodeEl.title = `${node.label} Channel - Click for details`;
+      nodeEl.title = `${node.label} - Click to view`;
+      nodeEl.style.cursor = 'pointer';
       
+      // Direct navigation without alert
       nodeEl.addEventListener('click', () => {
-        const analytics = {
-          activeConversations: Math.floor(Math.random() * 100) + 50,
-          responseTime: (Math.random() * 2 + 0.5).toFixed(1),
-          satisfactionScore: (Math.random() * 2 + 8).toFixed(1),
-          learningRate: (Math.random() * 20 + 80).toFixed(1)
-        };
-        
-        alert(
-          `${node.label} Channel Analytics:\n\n` +
-          `• Active Conversations: ${analytics.activeConversations}\n` +
-          `• Response Time: ${analytics.responseTime}s\n` +
-          `• Satisfaction Score: ${analytics.satisfactionScore}/10\n` +
-          `• Learning Rate: ${analytics.learningRate}%`
-        );
-        
         if (node.path) {
           navigate(node.path);
         }
+      });
+      
+      // Add hover effect
+      nodeEl.addEventListener('mouseenter', () => {
+        nodeEl.style.transform = 'scale(1.2)';
+        nodeEl.style.transition = 'transform 0.3s ease';
+      });
+      
+      nodeEl.addEventListener('mouseleave', () => {
+        nodeEl.style.transform = 'scale(1)';
       });
       
       container.appendChild(nodeEl);
@@ -104,11 +100,9 @@ const Dashboard = () => {
     const radius = 80;
 
     const data = [
-      { label: 'Chat', value: 30, color: '#00d4ff' },
-      { label: 'Email', value: 25, color: '#9333ea' },
-      { label: 'Social', value: 20, color: '#10b981' },
-      { label: 'Voice', value: 15, color: '#f59e0b' },
-      { label: 'Other', value: 10, color: '#ef4444' }
+      { label: 'Email', value: 30, color: '#00d4ff' },
+      { label: 'Chat', value: 25, color: '#9333ea' },
+      { label: 'CRM', value: 15, color: '#f59e0b' }
     ];
 
     const total = data.reduce((sum, item) => sum + item.value, 0);
@@ -268,12 +262,6 @@ const Dashboard = () => {
     };
   }, []);
 
-  // const handleChannelSelect = (channel) => {
-  //   setActiveChannel(channel);
-  //   console.log('Selected channel:', channel);
-  // };
-
-  
   return (
     <div className="dashboard-container">
       <canvas className="neural-background" ref={canvasRef} />

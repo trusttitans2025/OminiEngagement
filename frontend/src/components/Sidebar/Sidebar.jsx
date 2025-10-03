@@ -19,7 +19,7 @@ const navItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
   { text: 'Email', icon: <EmailIcon />, path: '/emails' },
   { text: 'Chat', icon: <ChatIcon />, path: '/chat' },
-  { text: 'Voice', icon: <VoicemailIcon />, path: '/voice' },
+  { text: 'CRM', icon: <VoicemailIcon />, path: 'https://crm-django-service-631872245250.us-central1.run.app/admin/login/?next=/admin/tickets/ticket/' },
 ];
 
 const Sidebar = () => {

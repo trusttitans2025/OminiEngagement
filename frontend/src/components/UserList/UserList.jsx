@@ -8,20 +8,20 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const users = [
   { 
     id: 1, 
-    name: 'John Doe', 
-    email: 'john.doe@example.com', 
+    name: 'Amit', 
+    email: 'Amit@example.com', 
     role: 'Admin', 
   },
   { 
     id: 2, 
-    name: 'Jane Smith', 
-    email: 'jane.smith@example.com', 
+    name: 'Shubham', 
+    email: 'Shubham@example.com', 
     role: 'User', 
   },
   { 
     id: 3, 
-    name: 'Peter Jones', 
-    email: 'peter.jones@example.com', 
+    name: 'Kajal', 
+    email: 'Kajal@example.com', 
     role: 'User', 
   },
 ];
@@ -43,7 +43,7 @@ const UserList = () => {
     });
     initialVoiceData.forEach(v => {
       if (v.email === email) {
-        tickets.push({ type: 'Voice', ticketNumber: v.ticketNumber, id: v.id });
+        tickets.push({ type: 'CRM', ticketNumber: v.ticketNumber, id: v.id });
       }
     });
     return tickets;
