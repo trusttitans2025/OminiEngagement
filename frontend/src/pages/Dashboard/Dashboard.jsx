@@ -158,7 +158,7 @@ const Dashboard = () => {
                   <div className="channel-selector">
                       <div className="channel-chip active">All Channels</div>
                       <div className="channel-chip">Email</div>
-                      <div className="channel-chip">Voice</div>
+                      <div className="channel-chip">CRM</div>
                   </div>
                 </div>
                 <div className="neural-network" id="neuralNetwork">

@@ -9,13 +9,13 @@ const users = [
   { 
     id: 1, 
     name: 'Amit', 
-    email: 'Amit@example.com', 
+    email: 'john.doe@example.com', 
     role: 'Admin', 
   },
   { 
     id: 2, 
     name: 'Shubham', 
-    email: 'Shubham@example.com', 
+    email: 'jane.smith@example.com', 
     role: 'User', 
   },
   { 
@@ -33,17 +33,17 @@ const UserList = () => {
     const tickets = [];
     initialEmails.forEach(e => {
       if (e.email === email) {
-        tickets.push({ type: 'Email', ticketNumber: e.ticketId, id: e.id });
-      }
+        tickets.push({ type: 'Email', ticketNumber: "WAI-05", id: '1' });
+       }
     });
     initialChatData.forEach(c => {
       if (c.email === email) {
-        tickets.push({ type: 'Chat', ticketNumber: c.ticketNumber, id: c.id });
+        tickets.push({ type: 'Chat', ticketNumber: "WAI-05", id: '2' });
       }
     });
     initialVoiceData.forEach(v => {
       if (v.email === email) {
-        tickets.push({ type: 'CRM', ticketNumber: v.ticketNumber, id: v.id });
+         tickets.push({ type: 'CRM', ticketNumber: "WAI-05", id: '3' });
       }
     });
     return tickets;
